@@ -1,0 +1,5 @@
+<h2><%= @plan.title %></h2>
+<div class="row">
+<% @comments.each do |comment| %>
+  <div class="span12"><%= comment.prose %></div>
+<% end %>

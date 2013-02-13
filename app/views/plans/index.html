@@ -1,0 +1,19 @@
+<div class="pull-right">
+  <%= link_to content_tag(:i, '', class: 'icon-plus-sign'), new_plan_path, class: "btn" %> </th>
+</div>
+<div class="row">
+  <table class="table-striped table-hover span12">
+    <tbody>
+    <% @plans.each do |plan| %>
+      <tr>
+        <td> <%= plan.open? ? link_to(content_tag(:i, '', class: 'icon-ok-sign'), {action: 'close', id: plan.id}) : '' %></td>
+        <td>
+          <h3><%= link_to plan.title, plan_path(plan) %></h3>
+          <%= content_tag :span, 'Example', class: 'label' %>
+        </td>
+        <td> <%= link_to content_tag(:i, '', class: 'icon-remove-sign'), {action: 'destroy', id: plan.id}, confirm: 'Pull the trigger?', method: 'delete' %> </td>
+    </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
