@@ -1,14 +1,15 @@
+<h2>Plans</h2>
 <div class="row-fluid">
   <div class="span9">
     <div class="tabbable">
       <div class="pull-right">
-        <%= link_to 'New Plan', new_plan_path, class: 'btn', data: {hotkey: 'n'} %>
         <%= form_tag plans_path, method: 'get', style: 'display: inline' do %>
           <span class="input-append">
-            <%= text_field_tag :search, params[:search] %>
+            <%= text_field_tag :search, params[:search]  %>
             <%= button_tag content_tag(:i, '', class: 'icon-search'), class: 'addon btn' %>
           </span>
         <% end %>
+        <%= link_to 'New Plan', new_plan_path, class: 'btn', data: {hotkey: 'n'} %>
       </div>
       <ul class="nav nav-tabs" id="plans-tabs">
         <li><a href="#tab-open-plans" data-toggle="tab"><%= pluralize(@open_plans.count, 'open plan') %></a></li>
