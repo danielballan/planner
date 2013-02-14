@@ -15,5 +15,8 @@
     <% action = @plan.open? ? 'close' : 'reopen' %>
       <div class="span2"><%= link_to content_tag(:button, action.humanize, class: 'btn green'), {action: action, id: @plan.id}, method: 'put' %></div>
   </div>
+<% if not @plan.open? %>
+  <div>Closed <%= @plan.closing_time.strftime('%A, %b. %e') %></dvi>
+<% end %>
 <% end %>
 

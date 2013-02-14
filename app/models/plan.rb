@@ -1,5 +1,5 @@
 class Plan < ActiveRecord::Base
-  attr_accessible :due, :open, :schedule, :title, :comments
+  attr_accessible :due, :open, :schedule, :title, :comments, :closing_time
   has_many :comments
 
   def self.search(search, conditions)

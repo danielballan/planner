@@ -41,6 +41,7 @@ class PlansController < ApplicationController
   def close
     plan = Plan.find(params[:id])
     plan.open = false
+    plan.closing_time = Time.now
     plan.save 
     redirect_to plans_url
   end
