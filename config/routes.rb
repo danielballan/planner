@@ -9,6 +9,8 @@ Planner::Application.routes.draw do
     end 
   end
 
+  resources :labels
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

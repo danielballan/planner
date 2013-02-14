@@ -1,9 +1,12 @@
 <h2>Plans</h2>
 <div class="row-fluid">
+  <div class="span3">
+    <%= render template: 'labels/index' %> 
+  </div>
   <div class="span9">
     <div class="tabbable">
       <div class="pull-right">
-        <%= form_tag plans_path, method: 'get', style: 'display: inline' do %>
+        <%= form_tag plans_path, method: 'get', style: 'display: inline', id: 'search' do %>
           <span class="input-append">
             <%= text_field_tag :search, params[:search]  %>
             <%= button_tag content_tag(:i, '', class: 'icon-search'), class: 'addon btn' %>
@@ -24,8 +27,6 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="span3">
   </div>
 </div>
 
