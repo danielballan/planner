@@ -2,7 +2,7 @@
   <div class="row"><h2 class="span12"><%= @plan.title %></h2></div>
   <% @comments.each do |comment| %>
     <div class="row">
-      <div class="span12 well"><%= comment.prose %></div>
+      <div class="span12 comment border-radius"><%= comment.prose %></div>
     </div>
   <% end %>
   <%= fields_for @new_comment do |c| %>

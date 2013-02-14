@@ -1,7 +1,15 @@
 <div class="row-fluid">
-        <%= link_to content_tag(:i, '', class: 'icon-plus-sign'), new_plan_path, class: "btn" %>
-  <div class="span8">
+  <div class="span9">
     <div class="tabbable">
+      <div class="pull-right">
+        <%= link_to 'New Plan', new_plan_path, class: 'btn', data: {hotkey: 'n'} %>
+        <%= form_tag plans_path, method: 'get', style: 'display: inline' do %>
+          <span class="input-append">
+            <%= text_field_tag :search, params[:search] %>
+            <%= button_tag content_tag(:i, '', class: 'icon-search'), class: 'addon btn' %>
+          </span>
+        <% end %>
+      </div>
       <ul class="nav nav-tabs" id="plans-tabs">
         <li><a href="#tab-open-plans" data-toggle="tab"><%= pluralize(@open_plans.count, 'open plan') %></a></li>
         <li><a href="#tab-closed-plans" data-toggle="tab"><%= pluralize(@closed_plans.count, 'closed plan') %></a></li>
@@ -15,6 +23,8 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="span3">
   </div>
 </div>
 

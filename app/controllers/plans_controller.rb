@@ -16,8 +16,8 @@ class PlansController < ApplicationController
   end
 
   def index
-    @open_plans = Plan.find(:all, conditions: {'open' => true})
-    @closed_plans = Plan.find(:all, conditions: {'open' => false})
+    @open_plans = Plan.search(params[:search], {'open' => true})
+    @closed_plans = Plan.search(params[:search], {'open' => false})
   end
 
   def show
@@ -29,6 +29,13 @@ class PlansController < ApplicationController
   def update
     plan = Plan.find(params[:id])
     plan.update_attributes(params[:plan])
+
+    if not params.has_key?(:new_comment)
+      new_comment = Comment.new(params[:new_comment])
+#      new_comment.plan_id = plan.id
+#      new_comment.save
+    end
+    redirect_to plans_path
   end
 
   def close

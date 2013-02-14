@@ -1,7 +1,7 @@
 <%= form_for @plan do |f| %>
-  <%= f.text_field :title %>
+  <%= f.text_field :title, placeholder: 'Title' %>
   <%= fields_for @comment do |c| %>
-    <div><%= c.text_area :prose %></div>
+    <div><%= c.text_area :prose, placeholder: 'Remarks'  %></div>
   <% end %>
   <%= f.submit %>
 <% end %>
