@@ -1,19 +1,29 @@
-<div class="pull-right">
-  <%= link_to content_tag(:i, '', class: 'icon-plus-sign'), new_plan_path, class: "btn" %> </th>
+<div class="row-fluid">
+        <%= link_to content_tag(:i, '', class: 'icon-plus-sign'), new_plan_path, class: "btn" %>
+  <div class="span8">
+    <div class="tabbable">
+      <ul class="nav nav-tabs" id="plans-tabs">
+        <li><a href="#tab-open-plans" data-toggle="tab"><%= pluralize(@open_plans.count, 'open plan') %></a></li>
+        <li><a href="#tab-closed-plans" data-toggle="tab"><%= pluralize(@closed_plans.count, 'closed plan') %></a></li>
+      </ul>
+      <div class="tab-content">
+        <div id="tab-open-plans" class="tab-pane">
+          <%= render 'plan_table', plans: @open_plans %>
+        </div>
+        <div id="tab-closed-plans" class="tab-pane">
+          <%= render 'plan_table', plans: @closed_plans %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-<div class="row">
-  <table class="table-striped table-hover span12">
-    <tbody>
-    <% @plans.each do |plan| %>
-      <tr>
-        <td> <%= plan.open? ? link_to(content_tag(:i, '', class: 'icon-ok-sign'), {action: 'close', id: plan.id}) : '' %></td>
-        <td>
-          <h3><%= link_to plan.title, plan_path(plan) %></h3>
-          <%= content_tag :span, 'Example', class: 'label' %>
-        </td>
-        <td> <%= link_to content_tag(:i, '', class: 'icon-remove-sign'), {action: 'destroy', id: plan.id}, confirm: 'Pull the trigger?', method: 'delete' %> </td>
-    </tr>
-    <% end %>
-    </tbody>
-  </table>
-</div>
+
+<% content_for :javascript do %>
+  <script>
+    $('#plans-tabs a').click(function(e) {
+      e.preventDefault();
+      $(this).tab('show');
+    })
+    $('#plans-tabs a:first').tab('show');
+  </script>
+<% end %>

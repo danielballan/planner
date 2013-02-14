@@ -1,5 +1,19 @@
-<h2><%= @plan.title %></h2>
-<div class="row">
-<% @comments.each do |comment| %>
-  <div class="span12"><%= comment.prose %></div>
+<%= form_for @plan do |f| %>
+  <div class="row"><h2 class="span12"><%= @plan.title %></h2></div>
+  <% @comments.each do |comment| %>
+    <div class="row">
+      <div class="span12 well"><%= comment.prose %></div>
+    </div>
+  <% end %>
+  <%= fields_for @new_comment do |c| %>
+    <div class="row">
+      <%= c.text_area :prose, placeholder: 'Blah', class: 'span12', style: 'display: inline;' %>
+    </div>
+  <% end %>
+  <div>
+    <div class="span2"><%= f.submit class: 'btn' %></div>
+    <% action = @plan.open? ? 'close' : 'reopen' %>
+      <div class="span2"><%= link_to content_tag(:button, action.humanize, class: 'btn green'), {action: action, id: @plan.id}, method: 'put' %></div>
+  </div>
 <% end %>
+

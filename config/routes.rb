@@ -4,7 +4,8 @@ Planner::Application.routes.draw do
 
   resources :plans do
     member do
-      post :close
+      put :close
+      put :reopen
     end 
   end
 
