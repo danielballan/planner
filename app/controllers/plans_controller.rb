@@ -16,8 +16,8 @@ class PlansController < ApplicationController
   end
 
   def index
-    @open_plans = Plan.search(params[:search], {'open' => true})
-    @closed_plans = Plan.search(params[:search], {'open' => false})
+    @open_plans = Plan.search(params[:search], {'open' => true}).order('created_at DESC')
+    @closed_plans = Plan.search(params[:search], {'open' => false}).order('closing_time DESC')
   end
 
   def show
