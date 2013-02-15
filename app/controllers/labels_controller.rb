@@ -1,5 +1,10 @@
 class LabelsController < ApplicationController
 
+  def manage
+    @labels = Label.all
+    @new_label = Label.new
+  end
+
   def create
     Label.create(params[:label])
     redirect_to plans_url
