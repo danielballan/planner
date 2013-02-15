@@ -1,6 +1,8 @@
 @import "bootstrap";
 @import "bootstrap-responsive";
 
+$lightGray: #F5F5F5;
+
 tr {
   height: 30px;
 }
@@ -19,8 +21,20 @@ table.plans {
 }
 
 .comment {
-  border: solid #ddd;
-  background-color: #eee;
+  width: 100%;
+  padding: 5px 0;
   margin: 10px 0;
-  padding: 15px;
+  border-bottom: solid 1px $lightGray;
+}
+
+.comment-field {
+  height: 100px;
+}
+
+.center {
+  text-align: center;
+}
+
+.small {
+  font-size: 85%;
 }

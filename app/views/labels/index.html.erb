@@ -1,0 +1,13 @@
+<h4>Labels</h4>
+<ul>
+<% @labels.each do |label| %>
+  <li>
+      <%= link_to label.name, {controller: 'plans', action: 'index', label: label.id}, method: 'get' %>
+      <%= link_to content_tag(:i, '', class: 'icon-remove-sign'), {controller: 'labels', action: 'destroy', id: label.id}, confirm: 'Pull the trigger?', method: 'delete' %>
+  </li>
+<% end %>
+</ul>
+<%= form_for @new_label do |l| %>
+  <%= l.text_field :name %>
+  <%= l.submit %>
+<% end %>

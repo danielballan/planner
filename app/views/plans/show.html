@@ -1,22 +1,40 @@
-<%= form_for @plan do |f| %>
-  <div class="row"><h2 class="span12"><%= @plan.title %></h2></div>
-  <% @comments.each do |comment| %>
-    <div class="row">
-      <div class="span12 comment border-radius"><%= comment.prose %></div>
-    </div>
+<div class="row">
+  <h2 class="span12"><%= @plan.title %></h2>
+</div>
+<div class="row">
+  <div class="span10">
+  <% @plan.comments.each do |comment| %>
+    <%= content_tag(:div, comment.prose, class: 'comment') %>
   <% end %>
-  <%= fields_for @new_comment do |c| %>
-    <div class="row">
-      <%= c.text_area :prose, placeholder: 'Blah', class: 'span12', style: 'display: inline;' %>
+  <%= form_for [@plan, @plan.comments.build] do |c| %>
+    <%= c.text_area :prose, placeholder: 'Elaborate.', class: 'comment comment-field' %>
+    <div class="pull-right">
+      <%= c.submit 'Comment', class: 'btn btn-primary' %>
+    <% end %>
+      <% action = @plan.open? ? 'close' : 'reopen' %>
+      <%= link_to content_tag(:button, action.humanize, class: 'btn btn-success'), {action: action, id: @plan.id}, method: 'put' %>
     </div>
-  <% end %>
-  <div>
-    <div class="span2"><%= f.submit class: 'btn' %></div>
-    <% action = @plan.open? ? 'close' : 'reopen' %>
-      <div class="span2"><%= link_to content_tag(:button, action.humanize, class: 'btn green'), {action: action, id: @plan.id}, method: 'put' %></div>
   </div>
-<% if not @plan.open? %>
-  <div>Closed <%= @plan.closing_time.strftime('%A, %b. %e') %></dvi>
-<% end %>
-<% end %>
+  <div class="span2">
+    <% if @plan.open? %>
+      <div class="well center">Open<br /> <%= content_tag(:span, 'since ' + @plan.created_at.strftime('%A, %b. %e'), class: 'small') %></div>
+    <% else %>
+      <div class="well center">Closed<br /> <%= content_tag(:span, 'on ' + @plan.closing_time.strftime('%A, %b. %e'), class: 'small') %></div>
+    <% end %>
+    <%= form_for @plan do |f| %>
+      <%= f.select :label_ids, Label.all.collect {|x| [x.name, x.id]}, {}, :multiple => true %>
+    <% end %>
+    <div class="btn-group">
+      <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+        Labels <span class="caret"></span>
+      </a>
+      <ul class="dropdown-menu">
+        <% @labels.each do |label| %>
+          <%= content_tag :li, link_to(label.name, '#') %>
+        <% end %> 
+      </ul>
+    </div>
+ 
+  </div>
+</div>
 

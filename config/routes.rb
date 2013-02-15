@@ -3,6 +3,7 @@ Planner::Application.routes.draw do
   root to: 'plans#index'
 
   resources :plans do
+    resources :comments
     member do
       put :close
       put :reopen

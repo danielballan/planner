@@ -7,11 +7,13 @@ class PlansController < ApplicationController
 
   def create
     plan = Plan.new(params[:plan])
-    comment = Comment.new(params[:comment])
     plan.open = true
     plan.save
-    comment.plan_id = plan.id
-    comment.save
+    if not params[:comment][:prose].blank?
+      comment = Comment.new(params[:comment])
+      comment.plan_id = plan.id
+      comment.save
+    end
     redirect_to plans_url
   end
 
@@ -29,8 +31,8 @@ class PlansController < ApplicationController
 
   def show
     @plan = Plan.find(params[:id])
-    @comments = Comment.find_all_by_plan_id(@plan.id)
     @new_comment = Comment.new
+    @labels = Label.scoped
   end
 
   def update
