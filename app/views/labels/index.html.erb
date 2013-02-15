@@ -1,9 +1,8 @@
 <h4>Labels</h4>
-<ul>
+<ul class="nav nav-pills nav-stacked">
 <% @labels.each do |label| %>
   <li>
       <%= link_to label.name, {controller: 'plans', action: 'index', label: label.id}, method: 'get' %>
-      <%= link_to content_tag(:i, '', class: 'icon-remove-sign'), {controller: 'labels', action: 'destroy', id: label.id}, confirm: 'Pull the trigger?', method: 'delete' %>
   </li>
 <% end %>
 </ul>

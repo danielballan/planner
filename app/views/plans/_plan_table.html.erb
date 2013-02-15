@@ -5,7 +5,9 @@
           <td> <%= plan.open? ? link_to(content_tag(:i, '', class: 'icon-ok-sign'), {action: 'close', id: plan.id}, method: 'put') : content_tag(:i, '', class: 'icon-ok') %></td>
           <td>
             <h3><%= link_to plan.title, plan_path(plan) %></h3>
-            <%= content_tag :span, 'Example', class: 'label' %>
+            <% plan.labels.each do |label| %>
+              <%= content_tag :span, label.name, class: 'label' %>
+            <% end %>
           </td>
           <td class="muted"><%= plan.created_at.strftime('%e %b.') %></td>
           <td> <%= link_to content_tag(:i, '', class: 'icon-remove-sign'), {action: 'destroy', id: plan.id}, confirm: 'Pull the trigger?', method: 'delete' %> </td>

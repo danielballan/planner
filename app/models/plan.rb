@@ -1,5 +1,5 @@
 class Plan < ActiveRecord::Base
-  attr_accessible :due, :open, :schedule, :title, :comments, :closing_time
+  attr_accessible :due, :open, :schedule, :title, :comments, :closing_time, :label_ids
   has_many :comments
   has_many :labelings
   has_many :labels, :through => :labelings

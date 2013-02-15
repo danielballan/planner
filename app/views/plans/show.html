@@ -22,19 +22,9 @@
       <div class="well center">Closed<br /> <%= content_tag(:span, 'on ' + @plan.closing_time.strftime('%A, %b. %e'), class: 'small') %></div>
     <% end %>
     <%= form_for @plan do |f| %>
-      <%= f.select :label_ids, Label.all.collect {|x| [x.name, x.id]}, {}, :multiple => true %>
+      <%= f.select :label_ids, Label.all.collect {|x| [x.name, x.id]}, {}, :multiple => true , :size => Label.all.size, :style => 'width: 100%;' %>
+      <%= f.submit 'Label', class: 'pull-right btn btn-primary'%>
     <% end %>
-    <div class="btn-group">
-      <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-        Labels <span class="caret"></span>
-      </a>
-      <ul class="dropdown-menu">
-        <% @labels.each do |label| %>
-          <%= content_tag :li, link_to(label.name, '#') %>
-        <% end %> 
-      </ul>
-    </div>
- 
   </div>
 </div>
 
