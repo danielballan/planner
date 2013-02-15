@@ -10,7 +10,11 @@ Planner::Application.routes.draw do
     end 
   end
 
-  resources :labels
+  resources :labels do
+    collection do
+      get :manage
+    end
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

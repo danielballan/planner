@@ -1,3 +1,4 @@
+<div id="labels">
 <h4>Labels</h4>
 <ul class="nav nav-pills nav-stacked">
 <% @labels.each do |label| %>
@@ -6,7 +7,5 @@
   </li>
 <% end %>
 </ul>
-<%= form_for @new_label do |l| %>
-  <%= l.text_field :name %>
-  <%= l.submit %>
-<% end %>
+<a href="/labels/manage" id="manage-labels" class="btn">Manage Labels</a>
+</div>
