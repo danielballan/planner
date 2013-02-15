@@ -16,8 +16,13 @@ class PlansController < ApplicationController
   end
 
   def index
-    @open_plans = Plan.search(params[:search]).where(:open => true).order('created_at DESC')
-    @closed_plans = Plan.search(params[:search]).where(:open => false).order('closing_time DESC')
+    if params[:label]
+      @plans = Plan.labeled(params[:label]).search(params[:search])
+    else
+      @plans = Plan.search(params[:search])
+    end
+    @open_plans = @plans.where(:open => true).order('created_at DESC')
+    @closed_plans = @plans.where(:open => false).order('closing_time DESC')
     @labels = Label.scoped
     @new_label = Label.new
   end

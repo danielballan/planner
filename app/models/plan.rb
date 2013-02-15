@@ -12,4 +12,6 @@ class Plan < ActiveRecord::Base
     end
   end
 
+  scope :labeled, lambda { |label| joins(:labels).where("labels.id = ?", label) }
+
 end
