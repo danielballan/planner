@@ -1,11 +1,14 @@
 <div id="labels">
 <h4>Labels</h4>
 <ul class="nav nav-pills nav-stacked">
-<% @labels.each do |label| %>
-  <li>
-      <%= link_to label.name, {controller: 'plans', action: 'index', label: label.id}, method: 'get' %>
-  </li>
-<% end %>
+  <% @labels.each do |label| %>
+    <%= content_tag :li, id: 'label-' + label.id.to_s do %>  
+        <%= link_to label.name, {controller: 'plans', action: 'index', label: label.id}, method: 'get' %> 
+    <% end %>
+  <% end %>
 </ul>
+<% if @active_label %>
+  <%= link_to content_tag(:i, '', class: 'icon-remove-circle') + ' Clear', plans_path, class: 'btn' %></li>
+  <% end %>
 <a href="/labels/manage" id="manage-labels" class="btn">Manage Labels</a>
 </div>

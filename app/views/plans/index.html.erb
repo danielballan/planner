@@ -12,13 +12,18 @@
             <%= button_tag content_tag(:i, '', class: 'icon-search'), class: 'addon btn' %>
           </span>
         <% end %>
-        <%= link_to 'New Plan', new_plan_path, class: 'btn', data: {hotkey: 'n'} %>
       </div>
       <ul class="nav nav-tabs" id="plans-tabs">
         <li><a href="#tab-open-plans" data-toggle="tab"><%= pluralize(@open_plans.count, 'open plan') %></a></li>
         <li><a href="#tab-closed-plans" data-toggle="tab"><%= pluralize(@closed_plans.count, 'closed plan') %></a></li>
       </ul>
       <div class="tab-content">
+        <%= form_for @plan do |f| %>
+          <%= hidden_field_tag 'comment', ' ' %>
+          <%= f.text_field :title, placeholder: 'New plan' %>
+          <%= f.submit 'Save', class: 'btn' %>
+          <%= link_to 'Elaborate...', new_plan_path, class: 'btn', data: {hotkey: 'n'} %>
+        <% end %> 
         <div id="tab-open-plans" class="tab-pane">
           <%= render 'plan_table', plans: @open_plans %>
         </div>
@@ -37,5 +42,8 @@
       $(this).tab('show');
     })
     $('#plans-tabs a:first').tab('show');
+    <% if @active_label %>
+          document.getElementById("label-<%= @active_label %>").className += 'active';
+    <% end %>
   </script>
 <% end %>

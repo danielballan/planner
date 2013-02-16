@@ -9,7 +9,7 @@ class PlansController < ApplicationController
     plan = Plan.new(params[:plan])
     plan.open = true
     plan.save
-    if not params[:comment][:prose].blank?
+    if not params[:comment] || params[:comment][:prose].blank?
       comment = Comment.new(params[:comment])
       comment.plan_id = plan.id
       comment.save
@@ -20,6 +20,7 @@ class PlansController < ApplicationController
   def index
     if params[:label]
       @plans = Plan.labeled(params[:label]).search(params[:search])
+      @active_label = params[:label]
     else
       @plans = Plan.search(params[:search])
     end
@@ -27,6 +28,7 @@ class PlansController < ApplicationController
     @closed_plans = @plans.where(:open => false).order('closing_time DESC')
     @labels = Label.scoped
     @new_label = Label.new
+    @plan = Plan.new # new plan
   end
 
   def show

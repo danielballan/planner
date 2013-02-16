@@ -9,5 +9,5 @@
 </ul>
 <%= form_for @new_label do |l| %>
   <%= l.text_field :name %>
-  <%= l.submit %>
+  <%= l.submit 'Create Label', class: 'btn btn-primary'%>
 <% end %>
