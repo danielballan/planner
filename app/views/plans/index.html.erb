@@ -18,17 +18,25 @@
         <li><a href="#tab-closed-plans" data-toggle="tab"><%= pluralize(@closed_plans.count, 'closed plan') %></a></li>
       </ul>
       <div class="tab-content">
-        <%= form_for @plan do |f| %>
+        <%= form_for @plan, remote: 'true' do |f| %>
           <%= hidden_field_tag 'comment', ' ' %>
           <%= f.text_field :title, placeholder: 'New plan' %>
           <%= f.submit 'Save', class: 'btn' %>
           <%= link_to 'Elaborate...', new_plan_path, class: 'btn', data: {hotkey: 'n'} %>
         <% end %> 
         <div id="tab-open-plans" class="tab-pane">
-          <%= render 'plan_table', plans: @open_plans %>
+          <table class="table-striped table-hover tab-content plans">
+            <tbody id="open-plans">
+              <%= render :partial => 'open_plan', :collection => @open_plans, :as=> :plan %>
+            </tbody>
+          </table>
         </div>
         <div id="tab-closed-plans" class="tab-pane">
-          <%= render 'plan_table', plans: @closed_plans %>
+          <table class="table-striped table-hover tab-content plans">
+            <tbody id="closed-plans">
+              <%= render :partial => 'closed_plan', :collection => @closed_plans, :as=> :plan %>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
@@ -36,14 +44,12 @@
 </div>
 
 <% content_for :javascript do %>
-  <script>
-    $('#plans-tabs a').click(function(e) {
-      e.preventDefault();
-      $(this).tab('show');
-    })
-    $('#plans-tabs a:first').tab('show');
-    <% if @active_label %>
-          document.getElementById("label-<%= @active_label %>").className += 'active';
-    <% end %>
-  </script>
+  $('#plans-tabs a').click(function(e) {
+    e.preventDefault();
+    $(this).tab('show');
+  })
+  $('#plans-tabs a:first').tab('show');
+  <% if @active_label %>
+        document.getElementById("label-<%= @active_label %>").className += 'active';
+  <% end %>
 <% end %>

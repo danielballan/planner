@@ -1,0 +1,4 @@
+<%= content_tag :div, class: 'comment', id: 'comment_' + comment.id.to_s do %>
+  <%= link_to content_tag(:span, raw('&times;'), class: 'pull-right'), [@plan, comment], { method: 'delete', remote: true }  %> </td>
+  <%= comment.prose %>
+<% end %>

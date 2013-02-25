@@ -1,6 +1,6 @@
 Planner::Application.routes.draw do
 
-  root to: 'plans#index'
+  root to: redirect('/plans')
 
   resources :plans do
     resources :comments

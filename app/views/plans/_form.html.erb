@@ -1,5 +1,5 @@
 <div class="row">
-<%= form_for @plan do |f| %>
+<%= form_remote_for @plan do |f| %>
   <div class="span10">
     <%= f.text_field :title, placeholder: 'The Plan', class: 'comment comment-field' %>
     <%= fields_for @comment do |c| %>

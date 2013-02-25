@@ -1,0 +1,2 @@
+$('#plan-<%= @plan.id %>').remove();
+$('#closed-plans').prepend('<%= j render 'closed_plan', plan: @plan %>');

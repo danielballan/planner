@@ -6,15 +6,18 @@ class PlansController < ApplicationController
   end
 
   def create
-    plan = Plan.new(params[:plan])
-    plan.open = true
-    plan.save
+    @plan = Plan.new(params[:plan])
+    @plan.open = true
+    @plan.save
     if not params[:comment] || params[:comment][:prose].blank?
       comment = Comment.new(params[:comment])
-      comment.plan_id = plan.id
+      comment.plan_id = @plan.id
       comment.save
     end
-    redirect_to plans_url
+    respond_to do |format|
+      format.html { redirect_to plans_url }
+      format.js
+    end
   end
 
   def index
@@ -50,11 +53,14 @@ class PlansController < ApplicationController
   end
 
   def close
-    plan = Plan.find(params[:id])
-    plan.open = false
-    plan.closing_time = Time.now
-    plan.save 
-    redirect_to plans_url
+    @plan = Plan.find(params[:id])
+    @plan.open = false
+    @plan.closing_time = Time.now
+    @plan.save 
+    respond_to do |format|
+      format.html { redirect_to plans_url }
+      format.js
+    end
   end
 
   def reopen
@@ -65,9 +71,11 @@ class PlansController < ApplicationController
   end
 
   def destroy
-    plan = Plan.find(params[:id])
-    plan.destroy
-    redirect_to plans_path
+    @plan = Plan.destroy(params[:id])
+    respond_to do |format|
+      format.html { redirect_to plans_url }
+      format.js
+    end
   end
 
 end

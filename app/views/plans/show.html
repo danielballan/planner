@@ -1,12 +1,16 @@
+<div class="pull-left">
+  <%= link_to plans_path do %>
+    <i class="icon-arrow-left"></i> Plans
+  <% end %>
 <div class="row">
   <h2 class="span12"><%= @plan.title %></h2>
 </div>
 <div class="row">
   <div class="span10">
-  <% @plan.comments.each do |comment| %>
-    <%= content_tag(:div, comment.prose, class: 'comment') %>
-  <% end %>
-  <%= form_for [@plan, @plan.comments.build] do |c| %>
+  <div id="comments">
+    <%= render :partial => 'comments/comment', :collection => @plan.comments %>
+  </div>
+  <%= form_for [@plan, @plan.comments.build], remote: true do |c| %>
     <%= c.text_area :prose, placeholder: 'Elaborate.', class: 'comment comment-field' %>
     <div class="pull-right">
       <%= c.submit 'Comment', class: 'btn btn-primary' %>
@@ -22,9 +26,17 @@
       <div class="well center">Closed<br /> <%= content_tag(:span, 'on ' + @plan.closing_time.strftime('%A, %b. %e'), class: 'small') %></div>
     <% end %>
     <%= form_for @plan do |f| %>
-      <%= f.select :label_ids, Label.all.collect {|x| [x.name, x.id]}, {}, :multiple => true , :size => Label.all.size, :style => 'width: 100%;' %>
+      <%= f.collection_select :label_ids, Label.all, :id, :name, {}, {multiple: true , size: Label.all.size, style: 'width: 100%;'} %>
       <%= f.submit 'Label', class: 'pull-right btn btn-primary'%>
     <% end %>
   </div>
 </div>
 
+<% content_for :javascript do %>
+  $('#comment_prose').keypress(function (e) {
+    if (e.which == 13) {
+      $('form#new_comment').submit();
+      return false;
+    }
+  });
+<% end %>
