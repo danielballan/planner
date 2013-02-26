@@ -7,5 +7,5 @@
     <% end %>
   </td>
   <td class="muted"><%= plan.created_at.strftime('%e %b.') %></td>
-  <td> <%= link_to content_tag(:i, '', class: 'icon-remove-sign'), {action: 'destroy', id: plan.id}, data: {confirm: 'Pull the trigger?'}, method: 'delete', remote: true  %> </td>
+  <td> <%= link_to raw('&times;'), {action: 'destroy', id: plan.id}, data: {confirm: 'Pull the trigger?'}, method: 'delete', remote: true  %> </td>
 </tr>

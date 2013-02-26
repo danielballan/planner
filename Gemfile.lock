@@ -29,6 +29,9 @@ GEM
       i18n (~> 0.6)
       multi_json (~> 1.0)
     arel (3.0.2)
+    best_in_place (2.1.0)
+      jquery-rails
+      rails (~> 3.1)
     bootstrap-sass (2.2.2.0)
       sass (~> 3.2)
     builder (3.0.4)
@@ -76,6 +79,8 @@ GEM
       activesupport (= 3.2.10)
       bundler (~> 1.0)
       railties (= 3.2.10)
+    rails_autolink (1.0.9)
+      rails (~> 3.1)
     railties (3.2.10)
       actionpack (= 3.2.10)
       activesupport (= 3.2.10)
@@ -111,12 +116,14 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  best_in_place
   bootstrap-sass
   chosen-rails
   coffee-rails (~> 3.2.1)
   ice_cube
   jquery-rails
   rails (= 3.2.10)
+  rails_autolink
   sass-rails (~> 3.2.3)
   sqlite3
   uglifier (>= 1.0.3)

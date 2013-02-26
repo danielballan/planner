@@ -18,4 +18,12 @@ class CommentsController < ApplicationController
     end
   end
 
+  def update
+    @comment = Comment.find(params[:id])
+    @comment.update_attributes(params[:id])
+    respond_to do |format|
+      format.js { @comment }
+    end
+  end
+
 end

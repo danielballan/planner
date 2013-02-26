@@ -1,4 +1,5 @@
 class PlansController < ApplicationController
+  respond_to :html, :json
 
   def new
     @plan = Plan.new
@@ -21,11 +22,11 @@ class PlansController < ApplicationController
   end
 
   def index
-    if params[:label]
-      @plans = Plan.labeled(params[:label]).search(params[:search])
-      @active_label = params[:label]
-    else
-      @plans = Plan.search(params[:search])
+    @plans = Plan.search(params[:search])
+    @active_labels = []
+    if params[:labels]
+      @active_labels = params[:labels]
+      @plans = @plans.labeled(@active_labels)
     end
     @open_plans = @plans.where(:open => true).order('created_at DESC')
     @closed_plans = @plans.where(:open => false).order('closing_time DESC')
@@ -41,15 +42,13 @@ class PlansController < ApplicationController
   end
 
   def update
-    plan = Plan.find(params[:id])
-    plan.update_attributes(params[:plan])
+    @plan = Plan.find(params[:id])
+    @plan.update_attributes(params[:plan])
+    respond_with @plan
 
     if not params.has_key?(:new_comment)
       new_comment = Comment.new(params[:new_comment])
-#      new_comment.plan_id = plan.id
-#      new_comment.save
     end
-    redirect_to plans_path
   end
 
   def close

@@ -1,14 +1,20 @@
 <div id="labels">
 <h4>Labels</h4>
-<ul class="nav nav-pills nav-stacked">
-  <% @labels.each do |label| %>
-    <%= content_tag :li, id: 'label-' + label.id.to_s do %>  
-        <%= link_to label.name, {controller: 'plans', action: 'index', label: label.id}, method: 'get' %> 
+<%= form_tag plans_path, action: 'index', method: 'get' do %>
+  <ul class="nav nav-pills nav-stacked">
+    <% @labels.each do |label| %>
+      <%= content_tag :div, class: 'ck-button' do %>
+      <%= content_tag :label, id: 'label-' + label.id.to_s do %>  
+          <%= check_box_tag "labels[]", label.id, @active_labels.include?(label.id.to_s) %> 
+          <span><%= label.name %></span>
+      <% end %>
+      <% end %>
     <% end %>
-  <% end %>
-</ul>
-<% if @active_label %>
-  <%= link_to content_tag(:i, '', class: 'icon-remove-circle') + ' Clear', plans_path, class: 'btn' %></li>
+  </ul>
+  <%= submit_tag 'Filter', class: 'btn' %>
+  <% if @active_labels %>
+    <%= link_to content_tag(:i, '', class: 'icon-remove-circle') + ' Clear', plans_path, class: 'btn' %></li>
   <% end %>
 <a href="/labels/manage" id="manage-labels" class="btn">Manage Labels</a>
+<% end %>
 </div>

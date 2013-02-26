@@ -14,6 +14,8 @@ class Plan < ActiveRecord::Base
     end
   end
 
-  scope :labeled, lambda { |label| joins(:labels).where("labels.id = ?", label) }
+  scope :labeled, lambda { |label_ids|
+    joins(:labelings).where('labelings.label_id' => label_ids) unless label_ids.empty?
+  }
 
 end
