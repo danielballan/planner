@@ -1,2 +1,4 @@
 $('#plan-<%= @plan.id %>').remove();
 $('#closed-plans').prepend('<%= j render 'closed_plan', plan: @plan %>');
+$('#count-closed-plans').html((parseInt($('#count-closed-plans').html(), 10) + 1).toString());
+$('#count-open-plans').html((parseInt($('#count-open-plans').html(), 10) - 1).toString());

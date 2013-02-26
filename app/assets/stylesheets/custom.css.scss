@@ -60,12 +60,12 @@ body {
 }
 
 .ck-button:hover {
-    background:red;
+    background: $lightGray;
 }
 
 .ck-button label span {
-    height: 100%;
-    text-align:center;
+    padding: 3px 10px;
+    margin-bottom: -5px;
     display:block;
 }
 

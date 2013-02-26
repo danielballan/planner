@@ -1,6 +1,6 @@
 <div id="labels">
 <h4>Labels</h4>
-<%= form_tag plans_path, action: 'index', method: 'get' do %>
+<%= form_tag plans_path, action: 'index', method: 'get', remote: true do %>
   <ul class="nav nav-pills nav-stacked">
     <% @labels.each do |label| %>
       <%= content_tag :div, class: 'ck-button' do %>
@@ -11,10 +11,6 @@
       <% end %>
     <% end %>
   </ul>
-  <%= submit_tag 'Filter', class: 'btn' %>
-  <% if @active_labels %>
-    <%= link_to content_tag(:i, '', class: 'icon-remove-circle') + ' Clear', plans_path, class: 'btn' %></li>
-  <% end %>
-<a href="/labels/manage" id="manage-labels" class="btn">Manage Labels</a>
+  <a href="/labels/manage" id="manage-labels" class="btn">Manage Labels</a>
 <% end %>
 </div>

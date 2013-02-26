@@ -14,8 +14,8 @@
         <% end %>
       </div>
       <ul class="nav nav-tabs" id="plans-tabs">
-        <li><a href="#tab-open-plans" data-toggle="tab"><%= pluralize(@open_plans.count, 'open plan') %></a></li>
-        <li><a href="#tab-closed-plans" data-toggle="tab"><%= pluralize(@closed_plans.count, 'closed plan') %></a></li>
+        <li><a href="#tab-open-plans" data-toggle="tab"><span id="count-open-plans"><%= raw pluralize(@open_plans.count, '</span> open plan') %></span></a></li>
+        <li><a href="#tab-closed-plans" data-toggle="tab"><span id="count-closed-plans"><%= raw pluralize(@closed_plans.count, '</span> closed plan') %></a></li>
       </ul>
       <div class="tab-content">
         <%= form_for @plan, remote: 'true' do |f| %>

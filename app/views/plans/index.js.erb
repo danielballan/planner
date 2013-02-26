@@ -1,0 +1,4 @@
+$('#tab-open-plans').html('<table class="table-striped table-hover tab-content plans"><tbody id="open-plans"><%= j render :partial => 'open_plan', :collection => @open_plans, :as=> :plan %></tbody></table>');
+$('#tab-closed-plans').html('<table class="table-striped table-hover tab-content plans"><tbody id="closed-plans"><%= j render :partial => 'closed_plan', :collection => @closed_plans, :as=> :plan %></tbody></table>');
+$('#count-open-plans').html('<%= @open_plans.count %>')
+$('#count-closed-plans').html('<%= @closed_plans.count %>')

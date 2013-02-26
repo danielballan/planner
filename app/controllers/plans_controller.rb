@@ -33,6 +33,10 @@ class PlansController < ApplicationController
     @labels = Label.scoped
     @new_label = Label.new
     @plan = Plan.new # new plan
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def show
