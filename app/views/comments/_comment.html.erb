@@ -3,5 +3,5 @@
     <%= link_to content_tag(:i, '', class: 'icon-edit'), '#', id: "comment_#{comment.id}_activator" %>
     <%= link_to content_tag(:span, raw('&times;')), [@plan, comment], { method: 'delete', remote: true } %>
   <% end %>
-  <%= simple_format auto_link best_in_place([@plan, comment], :prose, :activator => "#comment_#{comment.id}_activator") %>
+  <%= simple_format auto_link best_in_place([@plan, comment], :prose, { activator: "#comment_#{comment.id}_activator" }) %>
 <% end %>
