@@ -147,7 +147,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  best_in_place
+  best_in_place (= 2.1.0)
   bootstrap-sass
   capistrano-nginx
   capistrano-unicorn

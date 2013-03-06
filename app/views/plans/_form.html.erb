@@ -1,13 +1,12 @@
-<div class="row">
-<%= form_remote_for @plan do |f| %>
-  <div class="span10">
-    <%= f.text_field :title, placeholder: 'The Plan', class: 'comment comment-field' %>
-    <%= fields_for @comment do |c| %>
+<%= form_for @plan, remote: true do |f| %>
+  <div class="pull-right">
+    <%= f.collection_select :label_ids, Label.all, :id, :name, {}, {multiple: true , size: Label.all.size, style: 'width: 100%;', data: {placeholder: 'Choose labels.'}} %>
+  </div>
+    <%= f.text_field :title, placeholder: 'New Plan', class: 'comment comment-field' %>
+    <%= fields_for @plan.comments.build do |c| %>
       <div><%= c.text_area :prose, placeholder: 'Elaborate.', class: 'comment comment-field'  %></div>
     <% end %>
     <div class="pull-right">
       <%= f.submit 'New Plan', class: 'btn btn-primary' %>
     </div>
-  </div>
 <% end %>
-</div>

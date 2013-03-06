@@ -10,6 +10,7 @@ namespace :linode do
     install_dev_tools
     install_git
     install_dependencies
+    install_nginx
     install_sqlite3
     install_postgresql
     install_imagemagick
@@ -43,6 +44,11 @@ namespace :linode do
   desc "Install miscelaneous dependencies."
   task :install_dependencies do
     sudo "apt-get install build-essential bison openssl libreadline6 libreadline6-dev libcurl4-openssl-dev git-core zlib1g zlib1g-dev  libssl-dev libyaml-dev libsqlite3-0 libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev curl -y", :shell => 'bash'
+  end
+
+  desc "Install nginx."
+  task :install_nginx do
+    sudo "apt-get install nginx -y", :shell => 'bash'
   end
 
   desc "Install sqlite3."

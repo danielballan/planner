@@ -5,25 +5,15 @@
   </div>
   <div class="span9">
     <div class="tabbable">
-      <div class="pull-right">
-        <%= form_tag plans_path, method: 'get', style: 'display: inline', id: 'search' do %>
-          <span class="input-append">
-            <%= text_field_tag :search, params[:search]  %>
-            <%= button_tag content_tag(:i, '', class: 'icon-search'), class: 'addon btn' %>
-          </span>
-        <% end %>
-      </div>
       <ul class="nav nav-tabs" id="plans-tabs">
         <li><a href="#tab-open-plans" data-toggle="tab"><span id="count-open-plans"><%= raw pluralize(@open_plans.count, '</span> open plan') %></span></a></li>
         <li><a href="#tab-closed-plans" data-toggle="tab"><span id="count-closed-plans"><%= raw pluralize(@closed_plans.count, '</span> closed plan') %></a></li>
       </ul>
       <div class="tab-content">
-        <%= form_for @plan, remote: 'true' do |f| %>
-          <%= hidden_field_tag 'comment', ' ' %>
-          <%= f.text_field :title, placeholder: 'New plan' %>
-          <%= f.submit 'Save', class: 'btn' %>
-          <%= link_to 'Elaborate...', new_plan_path, class: 'btn', data: {hotkey: 'n'} %>
-        <% end %> 
+        <div class="table-header">
+          <%= render 'search' %>
+          <%= link_to 'New Plan', new_plan_path, id: 'new-plan-link', class: 'btn', remote: true %>
+        </div>
         <div id="tab-open-plans" class="tab-pane">
           <table class="table-striped table-hover tab-content plans">
             <tbody id="open-plans">

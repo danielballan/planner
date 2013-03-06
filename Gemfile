@@ -9,7 +9,7 @@ gem "therubyracer", "~> 0.10.1", :platform => :ruby
 gem 'sqlite3'
 gem 'ice_cube'
 gem 'rails_autolink'
-gem 'best_in_place'
+gem 'best_in_place', '2.1.0'
 
 
 # Gems used only for assets and not required

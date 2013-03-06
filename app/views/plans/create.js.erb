@@ -1,2 +1,4 @@
+$('#new_plan').remove();
+$('#new-plan-link').show();
 $('#open-plans').prepend('<%= j render 'open_plan', plan: @plan %>');
 $('#count-open-plans').html((parseInt($('#count-open-plans').html(), 10) + 1).toString());

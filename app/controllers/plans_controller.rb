@@ -1,18 +1,16 @@
 class PlansController < ApplicationController
-  respond_to :html, :json
+  respond_to :html, :json, :js
 
   def new
     @plan = Plan.new
-    @comment = Comment.new
   end
 
   def create
     @plan = Plan.new(params[:plan])
     @plan.open = true
     @plan.save
-    if not params[:comment] || params[:comment][:prose].blank?
-      comment = Comment.new(params[:comment])
-      comment.plan_id = @plan.id
+    if not params[:comment][:prose].blank?
+      comment = @plan.comments.build(params[:comment])
       comment.save
     end
     respond_to do |format|
@@ -33,10 +31,6 @@ class PlansController < ApplicationController
     @labels = Label.scoped
     @new_label = Label.new
     @plan = Plan.new # new plan
-    respond_to do |format|
-      format.html
-      format.js
-    end
   end
 
   def show

@@ -1,0 +1,6 @@
+<%= form_tag plans_path, method: 'get', style: 'display: inline', id: 'search' do %>
+  <span class="input-append">
+    <%= text_field_tag :search, params[:search]  %>
+    <%= button_tag content_tag(:i, '', class: 'icon-search'), class: 'addon btn' %>
+  </span>
+<% end %>
